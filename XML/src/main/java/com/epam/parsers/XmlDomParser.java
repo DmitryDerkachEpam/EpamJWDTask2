@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import com.epam.entities.FamilyVoucher;
-import com.epam.entities.TouristVoucher;
+import com.epam.entities.Voucher;
 import com.epam.entities.associatedclasses.HotelCharacteristics;
 import com.epam.entities.associatedclasses.MealType;
 import com.epam.entities.associatedclasses.MealsIncluded;
@@ -24,8 +24,8 @@ public class XmlDomParser implements Parser {
 	public static void main(String[] args) {
 		XmlDomParser xmlDomParser = new XmlDomParser();
 		try {
-			List<TouristVoucher> touristVouchers = xmlDomParser.parse("src/main/resources/vouchers.xml");
-			for (TouristVoucher itterator : touristVouchers) {
+			List<Voucher> touristVouchers = xmlDomParser.parse("src/main/resources/vouchers.xml");
+			for (Voucher itterator : touristVouchers) {
 				System.out.println(itterator);
 			}
 		} catch (ParserException e) {
@@ -35,11 +35,11 @@ public class XmlDomParser implements Parser {
 	}
 
 	@Override
-	public List<TouristVoucher> parse(String filePath) throws ParserException {
+	public List<Voucher> parse(String filePath) throws ParserException {
 		/* Converting XML to DOM Object Model with Error Handling */
 		Document domObject = buildDocument(filePath);
 		/* Creating list of objects from XML input */
-		List<TouristVoucher> listOfVouchers = new ArrayList<>();
+		List<Voucher> listOfVouchers = new ArrayList<>();
 
 		/* Data processing */
 		Node rootNode = domObject.getFirstChild();
@@ -105,7 +105,7 @@ public class XmlDomParser implements Parser {
 				continue;
 			}
 
-			if (childNodeName.equals(getData(TAG_NUMBER_OF_SATRS))) {
+			if (childNodeName.equals(getData(TAG_NUMBER_OF_STARS))) {
 				hotelCharacteristics.setNumOfStars(Integer.parseInt(childNodeContent));
 				continue;
 			}
@@ -214,7 +214,7 @@ public class XmlDomParser implements Parser {
 		return document;
 	}// buildDocument
 
-	private static void commonForAllTagsProccesing(Node voucherNode, TouristVoucher voucher) {
+	private static void commonForAllTagsProccesing(Node voucherNode, Voucher voucher) {
 
 		/* Processing familyVoucherNode children */
 		NodeList voucherNodeChildren = voucherNode.getChildNodes();

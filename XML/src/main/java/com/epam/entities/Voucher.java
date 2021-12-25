@@ -3,7 +3,7 @@ package com.epam.entities;
 import com.epam.entities.associatedclasses.HotelCharacteristics;
 import com.epam.entities.associatedclasses.Type;
 
-public class TouristVoucher {
+public class Voucher {
 	private int id;
 	private Type type;
 	private String country;
@@ -12,7 +12,7 @@ public class TouristVoucher {
 	private HotelCharacteristics hotelCharacteristics;
 	private int cost;
 	
-	public TouristVoucher() {
+	public Voucher() {
 	
 	}
 
@@ -82,7 +82,5 @@ public class TouristVoucher {
 				"hotelCharacteristics: \n" + hotelCharacteristics.toString() + ", \n" +
 				"cost=" + cost;
 	}
-	
-	
 	
 }

@@ -36,5 +36,4 @@ public class MealsIncluded {
 			   "		mealType=" + mealType + "]";
 	} 
 	
-	
 }

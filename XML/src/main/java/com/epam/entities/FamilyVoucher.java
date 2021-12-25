@@ -1,6 +1,6 @@
 package com.epam.entities;
 
-public class FamilyVoucher extends TouristVoucher {
+public class FamilyVoucher extends Voucher {
 	
 	private int numOfFamilyMembers;
 	

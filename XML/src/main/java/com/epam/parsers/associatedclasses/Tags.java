@@ -10,7 +10,7 @@ public enum Tags {
 	TAG_NUMBER_OF_DAYS("numberOfDays"),
 	TAG_TRANSPORT("transport"),
 	TAG_HOTEL_CHARACTERISTICS("hotelCharacteristics"),
-	TAG_NUMBER_OF_SATRS("numberOfStars"),
+	TAG_NUMBER_OF_STARS("numberOfStars"),
 	TAG_MEALS_INCLUDED("mealsIncluded"),
 	TAG_MEAL_TYPE("mealType"),
 	TAG_ROOM_TYPE("roomType"),
@@ -30,10 +30,6 @@ public enum Tags {
 	
 	public String getData() {
 		return data;
-	}
-
-	public void setName(String data) {
-		this.data = data;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.epam.handler;
+package com.epam.validator;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
