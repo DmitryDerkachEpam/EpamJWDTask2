@@ -1,8 +1,18 @@
 package com.epam.entities.associatedclasses;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "HotelCharacteristics", propOrder = {"numOfStars", "mealsIncluded", "roomType"})
 public class HotelCharacteristics {
+	@XmlElement(name = "numberOfStars", namespace = "test")
 	private int numOfStars;
+	@XmlElement(name = "mealsIncluded", namespace = "test")
 	private MealsIncluded mealsIncluded;
+	@XmlElement(name = "roomType", namespace = "test")
 	private RoomType roomType;
 	
 	public HotelCharacteristics() {

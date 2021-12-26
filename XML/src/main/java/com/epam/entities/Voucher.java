@@ -1,15 +1,35 @@
 package com.epam.entities;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import com.epam.entities.associatedclasses.HotelCharacteristics;
 import com.epam.entities.associatedclasses.Type;
 
-public class Voucher {
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Voucher", propOrder = {"id", "type", "country", "numberOfDays", "transport", "hotelCharacteristics", "cost"})
+@XmlSeeAlso({FamilyVoucher.class, BusinessVoucher.class})
+public abstract class Voucher {
+    @XmlAttribute (name = "id")
 	private int id;
+    @XmlElement(namespace = "test")
 	private Type type;
+    @XmlElement(namespace = "test")
 	private String country;
+    @XmlElement(namespace = "test")
 	private int numberOfDays;
+    @XmlElement(namespace = "test")
 	private String transport;
+    @XmlElement(namespace = "test")
 	private HotelCharacteristics hotelCharacteristics;
+    @XmlElement(namespace = "test")
 	private int cost;
 	
 	public Voucher() {

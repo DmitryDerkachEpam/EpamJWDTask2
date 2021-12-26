@@ -3,6 +3,7 @@ package com.epam.director;
 import com.epam.exception.ParserException;
 import com.epam.parsers.Parser;
 import com.epam.parsers.XmlDomParser;
+import com.epam.parsers.XmlJaxbParser;
 import com.epam.parsers.saxparser.XmlSaxParser;
 import com.epam.validator.VouchersValidator;
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ public class Director {
 	}
 	
 	public static void main(String[] args) {
-		/*Should be same output for Sax/Dom parsers (it's same)*/
-		Director director = new Director(new XmlDomParser(), new VouchersValidator());
+		/*Should be same output for Sax/Dom and small difference for Jaxb parsers*/
+		Director director = new Director(new XmlJaxbParser(), new VouchersValidator());
 		try {
 			List<Voucher> vouchers = director.parseXml("src/main/resources/vouchers.xml", "src/main/resources/vouchersSchema.xsd");
 			for (int i = 0; i < vouchers.size(); i++) {
