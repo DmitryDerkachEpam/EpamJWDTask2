@@ -19,7 +19,7 @@ public class SaxParserHandler extends DefaultHandler {
 	
 	public List<Voucher> vouchers = new ArrayList();
 
-	HotelCharacteristics hotelCharacteristics = new HotelCharacteristics();
+	HotelCharacteristics hotelCharacteristics = null;
 	MealsIncluded mealsIncluded = new MealsIncluded();
 	
 	private Voucher currentVoucher;
@@ -93,27 +93,23 @@ public class SaxParserHandler extends DefaultHandler {
 		
 		processingCommonTags(currentTagName, tagData);
 		
-		if (insideFamilyVoucherTag) {
+		if (insideFamilyVoucherTag && currentTagName.equals(getData(TAG_NUMBER_OF_FAMILY_MEMBERS))) {
 			FamilyVoucher familyVoucher = (FamilyVoucher) currentVoucher;
-			
-			if (currentTagName.equals(getData(TAG_NUMBER_OF_FAMILY_MEMBERS))) {
-				familyVoucher.setNumOfFamilyMembers(Integer.parseInt(tagData));
-			} 
-			
+			familyVoucher.setNumOfFamilyMembers(Integer.parseInt(tagData));
+		
 		}
 		
-		if (insideBusinessVoucherTag) {
+		if (insideBusinessVoucherTag && currentTagName.equals(getData(TAG_NUMBER_OF_MEETINGS))) {
 			BusinessVoucher businessVoucher = (BusinessVoucher) currentVoucher;
-			
-			if (currentTagName.equals(getData(TAG_NUMBER_OF_MEETINGS))) {
-				businessVoucher.setNumOfMeetings(Integer.parseInt(tagData));
-			} 
+			businessVoucher.setNumOfMeetings(Integer.parseInt(tagData));
 			
 		}
 		
 	}//characters
 	
 	private void processingCommonTags(String currentTagName, String tagData) {
+		
+		//HotelCharacteristics hotelCharacteristics = new HotelCharacteristics();
 		
 		if (currentTagName.equals(getData(TAG_TYPE))) {
 			currentVoucher.setType(Type.valueOf(tagData.toUpperCase()));
@@ -131,20 +127,41 @@ public class SaxParserHandler extends DefaultHandler {
 			currentVoucher.setTransport(tagData);
 		}
 			
+		/*Костылик временный*/
+		if (insideBusinessVoucherTag && currentTagName.equals(getData(TAG_HOTEL_CHARACTERISTICS))) {
+			hotelCharacteristics = new HotelCharacteristics();
+		}
+		
+		if (insideFamilyVoucherTag && currentTagName.equals(getData(TAG_HOTEL_CHARACTERISTICS))) {
+			hotelCharacteristics = new HotelCharacteristics();
+		}
+		
 		if (currentTagName.equals(getData(TAG_NUMBER_OF_STARS))) {
 			hotelCharacteristics.setNumOfStars(Integer.parseInt(tagData));
 		}
 		
-		if (currentTagName.equals(getData(TAG_MEAL_TYPE))) {
-			mealsIncluded.setMealType(MealType.valueOf(tagData.toUpperCase()));
-			hotelCharacteristics.setMealsIncluded(mealsIncluded);
+		if (insideFamilyVoucherTag && currentTagName.equals(getData(TAG_MEAL_TYPE))) {
+			MealsIncluded finalmealsIncluded = new MealsIncluded();
+			finalmealsIncluded.setAvailable(mealsIncluded.getAvailable());
+			finalmealsIncluded.setMealType(MealType.valueOf(tagData.toUpperCase()));
+			mealsIncluded = finalmealsIncluded;
 		}
+		
+		if (insideBusinessVoucherTag && currentTagName.equals(getData(TAG_MEAL_TYPE))) {
+			MealsIncluded finalmealsIncluded = new MealsIncluded();
+			finalmealsIncluded.setAvailable(mealsIncluded.getAvailable());
+			finalmealsIncluded.setMealType(MealType.valueOf(tagData.toUpperCase()));
+			mealsIncluded = finalmealsIncluded;
+		}
+		
+//		if (currentTagName.equals(getData(TAG_MEAL_TYPE))) {
+//			mealsIncluded.setMealType(MealType.valueOf(tagData.toUpperCase()));
+//			hotelCharacteristics.setMealsIncluded(mealsIncluded);
+//		}
 		
 		if (currentTagName.equals(getData(TAG_ROOM_TYPE))) {
 			hotelCharacteristics.setRoomType(RoomType.valueOf(tagData.toUpperCase()));
-		}
-		
-		if (currentTagName != getData(TAG_TOURIST_VOUCHERS)) {
+			hotelCharacteristics.setMealsIncluded(mealsIncluded);
 			currentVoucher.setHotelCharacteristics(hotelCharacteristics);
 		}
 		
@@ -153,5 +170,20 @@ public class SaxParserHandler extends DefaultHandler {
 		}
 		
 	}//processingCommonTags
+	
+//	private void hotelTagProcessing(HotelCharacteristics hotelCharacteristics, String tagData) {
+//		if (currentTagName.equals(getData(TAG_NUMBER_OF_STARS))) {
+//			hotelCharacteristics.setNumOfStars(Integer.parseInt(tagData));
+//		}
+//		
+//		if (currentTagName.equals(getData(TAG_MEAL_TYPE))) {
+//			mealsIncluded.setMealType(MealType.valueOf(tagData.toUpperCase()));
+//			hotelCharacteristics.setMealsIncluded(mealsIncluded);
+//		}
+//		
+//		if (currentTagName.equals(getData(TAG_ROOM_TYPE))) {
+//			hotelCharacteristics.setRoomType(RoomType.valueOf(tagData.toUpperCase()));
+//		}
+//	}
 	
 }//SaxParserHandler

@@ -34,5 +34,36 @@ public class TouristVouchers {
         return listOfVouchers.add(voucher);
     }
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((listOfVouchers == null) ? 0 : listOfVouchers.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		TouristVouchers other = (TouristVouchers) obj;
+		if (listOfVouchers == null) {
+			if (other.listOfVouchers != null) {
+				return false;
+			}
+		} else if (!listOfVouchers.equals(other.listOfVouchers)) {
+			return false;
+		}
+		return true;
+	}
+
+    
 	
 }

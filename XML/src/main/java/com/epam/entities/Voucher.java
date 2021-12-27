@@ -93,6 +93,68 @@ public abstract class Voucher {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + cost;
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((hotelCharacteristics == null) ? 0 : hotelCharacteristics.hashCode());
+		result = prime * result + id;
+		result = prime * result + numberOfDays;
+		result = prime * result + ((transport == null) ? 0 : transport.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Voucher other = (Voucher) obj;
+		if (cost != other.cost) {
+			return false;
+		}
+		if (country == null) {
+			if (other.country != null) {
+				return false;
+			}
+		} else if (!country.equals(other.country)) {
+			return false;
+		}
+		if (hotelCharacteristics == null) {
+			if (other.hotelCharacteristics != null) {
+				return false;
+			}
+		} else if (!hotelCharacteristics.equals(other.hotelCharacteristics)) {
+			return false;
+		}
+		if (id != other.id) {
+			return false;
+		}
+		if (numberOfDays != other.numberOfDays) {
+			return false;
+		}
+		if (transport == null) {
+			if (other.transport != null) {
+				return false;
+			}
+		} else if (!transport.equals(other.transport)) {
+			return false;
+		}
+		if (type != other.type) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return  "id=" + id + ", \n" +
 				"type=" + type + ", \n" +

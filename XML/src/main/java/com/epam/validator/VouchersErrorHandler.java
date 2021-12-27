@@ -7,9 +7,9 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class VouchersErrorHandler extends DefaultHandler {
-	 private static final Logger LOGGER = LogManager.getLogger(VouchersErrorHandler.class);
+	private static final Logger LOGGER = LogManager.getLogger(VouchersErrorHandler.class);
     private boolean isError = false;
-
+    
     public void warning(SAXParseException e) {
         LOGGER.log(Level.WARN, getLineAddress(e) + " - " + e.getMessage());
         isError = true;

@@ -2,8 +2,9 @@ package com.epam.validator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+//import org.apache.logging.log4j.core.parser.ParseException;
 import org.xml.sax.SAXException;
-
+import com.epam.exception.ParserException;
 import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
@@ -16,14 +17,14 @@ import java.io.IOException;
 public class VouchersValidator {
 	 private static final Logger LOGGER = LogManager.getLogger(VouchersValidator.class);
 
-	    //TODO: Add checking for null-paths
+	 
 	 	
-        public static void main(String[] args) {
-			VouchersValidator test = new VouchersValidator();
-			test.isValid("src/main/resources/vouchers.xml", "src/main/resources/vouchersSchema.xsd");
-		}	 
+//        public static void main(String[] args) throws ParserException {
+//			VouchersValidator test = new VouchersValidator();
+//			test.isValid("src/main/resources/vouchers.xml", "src/main/resources/vouchersSchema.xsd");
+//		}	 
 
-	    public boolean isValid(String xmlPath, String xsdPath) {
+	    public boolean isValid(String xmlPath, String xsdPath) throws ParserException {
 	        String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
 	        SchemaFactory schemaFactory = SchemaFactory.newInstance(language);
 	        boolean isValid = true;
@@ -46,8 +47,10 @@ public class VouchersValidator {
 
 	            LOGGER.info(String.format("File %s is valid.", xmlPath));
 
-	        } catch (SAXException | IOException e) {
+	        } catch (SAXException | IOException | NullPointerException e) {
 	            LOGGER.info(String.format("File %s is not valid.", xmlPath), e);
+	            isValid = false;
+	           	throw new ParserException(e.toString());
 	        }
 
 	        return isValid;

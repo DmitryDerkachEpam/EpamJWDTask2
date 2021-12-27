@@ -23,7 +23,7 @@ public class MealsIncluded {
 		
 	}
 
-	public boolean isAvailable() {
+	public boolean getAvailable() {
 		return available;
 	}
 
@@ -37,6 +37,38 @@ public class MealsIncluded {
 
 	public void setMealType(MealType mealType) {
 		this.mealType = mealType;
+	}
+
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (available ? 1231 : 1237);
+		result = prime * result + ((mealType == null) ? 0 : mealType.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		MealsIncluded other = (MealsIncluded) obj;
+		if (available != other.available) {
+			return false;
+		}
+		if (mealType != other.mealType) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

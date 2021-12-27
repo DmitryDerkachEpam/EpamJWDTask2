@@ -22,6 +22,32 @@ public class BusinessVoucher extends Voucher{
 	public void setNumOfMeetings(int numOfMeetings) {
 		this.numOfMeetings = numOfMeetings;
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + numOfMeetings;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		BusinessVoucher other = (BusinessVoucher) obj;
+		if (numOfMeetings != other.numOfMeetings) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

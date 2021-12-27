@@ -43,6 +43,46 @@ public class HotelCharacteristics {
 		this.roomType = roomType;
 	}
 
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((mealsIncluded == null) ? 0 : mealsIncluded.hashCode());
+		result = prime * result + numOfStars;
+		result = prime * result + ((roomType == null) ? 0 : roomType.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		HotelCharacteristics other = (HotelCharacteristics) obj;
+		if (mealsIncluded == null) {
+			if (other.mealsIncluded != null) {
+				return false;
+			}
+		} else if (!mealsIncluded.equals(other.mealsIncluded)) {
+			return false;
+		}
+		if (numOfStars != other.numOfStars) {
+			return false;
+		}
+		if (roomType != other.roomType) {
+			return false;
+		}
+		return true;
+	}
+
 	@Override
 	public String toString() {
 		return  "   	[HotelCharacteristicsData: \n" + 
